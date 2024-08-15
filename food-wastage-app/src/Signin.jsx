@@ -67,8 +67,8 @@ function Signin() {
                             alert("Wrong Password")
                             return
                         }
-                        console.log(response.data)
-                        setShowLogout(true)
+                        // console.log(response.data)
+                        setShowLogout(false)
                         navigate('/')
                         localStorage.setItem('userToken',response.data.token)
                         alert(response.data.message)

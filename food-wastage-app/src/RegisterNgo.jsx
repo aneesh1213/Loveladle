@@ -78,7 +78,7 @@ function Register() {
                     />
                     <Button
                         variant="contained"
-                        color="primary"
+       
                         fullWidth
                         onClick={()=>{
                             axios.post("http://localhost:3000/ngo/register", {
@@ -97,7 +97,7 @@ function Register() {
                                 }
                             }).then(handleregister);
                         }}
-                        style={{ marginTop: 20 }}
+                        style={{ marginTop: 20 , backgroundColor:"#4CAF50"}}
                     >
                         Register
                     </Button>

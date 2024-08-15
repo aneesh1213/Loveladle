@@ -6,7 +6,7 @@ import Register from './RegisterNgo.jsx';
 import Appbar from './Appbar.jsx';
 import Sidebar from './Sidebar.jsx';
 import Landing from './Landing.jsx';
-
+import Connect from './ConnectNgo.jsx';
 import { useNavigate } from 'react-router-dom';
 import Donate from './Donate.jsx';
 import { RecoilRoot } from 'recoil';
@@ -32,7 +32,8 @@ function App() {
             <Route path="/signin" element={<Signin />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/register" element={<Register />} />
-            {/* <Route path="/donate" element={<Donate />} /> */}
+            <Route path="/donate" element={<Donate />} />
+            <Route path="/connect/:ngoId" element={<Connect />} />
           </Routes>
         </div>
       </Router>

@@ -69,8 +69,8 @@ function Signup() {
                             alert("Email already exists")
                             return
                         }
-                        console.log(response.data)
-                        setShowLogout(true)
+                        // console.log(response.data)
+                        setShowLogout(false)
                         localStorage.setItem('userToken',response.data.token)
                         alert("User Signin Successful!!")
                     }).then(handlesignup);
