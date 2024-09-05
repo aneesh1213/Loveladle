@@ -21,6 +21,7 @@ const ngoSchema = new mongoose.Schema({
     address: String, 
     location: String, 
     phone: String,
+    password:String,
     usersInfo: [userInfoSchema] // Array of user information
 });
 

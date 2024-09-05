@@ -12,10 +12,12 @@ function Register() {
     const [address, setAddress] = useState("");
     const [location, setLocation] = useState("");
     const [phone, setPhone] = useState("");
+    const [password, setPassword] = useState("");
+
 
     const navigate = useNavigate();
     const handleregister = async()=>{
-        navigate('/');
+        navigate('/userconnect');
     }
 
     return (
@@ -76,6 +78,14 @@ function Register() {
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                     />
+                    <TextField
+                        label="Password"
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
                     <Button
                         variant="contained"
        
@@ -87,6 +97,7 @@ function Register() {
                                 address:address,
                                 location:location,
                                 phone:phone,
+                                password:password
                             }).then((response)=>{
                                 console.log(response.data);
                                 if(response.status == 205){

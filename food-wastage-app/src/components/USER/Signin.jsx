@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import  axios  from 'axios';
 import { useSetRecoilState } from 'recoil';
-import { showLogout } from './atoms';
+import { showLogout } from '../../atoms';
 
 function Signin() {
     const setShowLogout = useSetRecoilState(showLogout)
@@ -13,7 +13,7 @@ function Signin() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const handlesignin = async()=>{
-        navigate('/');
+        navigate('/landing');
     }
 
     return <div>
@@ -68,8 +68,8 @@ function Signin() {
                             return
                         }
                         // console.log(response.data)
-                        setShowLogout(false)
-                        navigate('/')
+                        setShowLogout(true)
+                        
                         localStorage.setItem('userToken',response.data.token)
                         alert(response.data.message)
                     }).then(handlesignin);

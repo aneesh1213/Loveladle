@@ -36,21 +36,24 @@ const Sidebar = ({ open, onClose }) => {
       </div>
       <List>
         {/* Sidebar navigation links */}
-        <ListItem button component={RouterLink} to="/">
+        <ListItem button component={RouterLink} to="/landing">
           <ListItemText primary="Home" />
         </ListItem>
-        <ListItem button component={RouterLink} to="/register">
+        {/* <ListItem button component={RouterLink} to="/register">
           <ListItemText primary="Register NGO" />
-        </ListItem>
+        </ListItem> */}
         <ListItem button component={RouterLink} to="/donate">
           <ListItemText primary="Donate" />
         </ListItem>
-        <ListItem button component={RouterLink} to="/about">
+        {/* <ListItem button component={RouterLink} to="/ngologin">
+          <ListItemText primary="Ngo Login" />
+        </ListItem> */}
+        {/* <ListItem button component={RouterLink} to="/about">
           <ListItemText primary="About" />
         </ListItem>
         <ListItem button component={RouterLink} to="/contact">
           <ListItemText primary="Contact" />
-        </ListItem>
+        </ListItem> */}
       </List>
     </Drawer>
   );

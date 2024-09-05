@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios  from 'axios';
 import { useSetRecoilState } from 'recoil';
-import { showLogout } from './atoms';
+import { showLogout } from '../../atoms';
 
 function Signup() {
     const setShowLogout = useSetRecoilState(showLogout)
@@ -70,7 +70,7 @@ function Signup() {
                             return
                         }
                         // console.log(response.data)
-                        setShowLogout(false)
+                        setShowLogout(true)
                         localStorage.setItem('userToken',response.data.token)
                         alert("User Signin Successful!!")
                     }).then(handlesignup);

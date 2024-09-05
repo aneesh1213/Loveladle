@@ -11,8 +11,25 @@ export const showLogout = atom({
     default: false 
 });
 
-
   export const gettngos = atom({
-    key:'getNgoss', 
+    key:'gettngos', 
     default:[]
   })
+
+
+  export const authState = atom({
+    key:'authState', 
+    default:{
+      isAuthenticated : false,
+      token : null,
+      role : null
+    }
+  })
+
+export const role = atom({
+  key:'roleSelection', 
+  default:{
+    userRole:false,
+    ngoRole:false
+  }
+})
