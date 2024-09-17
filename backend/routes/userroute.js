@@ -61,35 +61,33 @@ router.get('/donate', UserAuth, async (req, res) => {
 });
 
 
-router.post('/donate/connect/:ngoId', userAuth, async(req, res) => {
-    try{    
+router.post('/donate/connect/:ngoId', userAuth, async (req, res) => {
+    try {
         const ngoId = req.params.ngoId;
         console.log("ngoId from /connect/:ngoId is:", ngoId);
 
-        
         const ngo = await Ngo.findById(ngoId);
-        if(!ngo){
-            res.status(404).json({message:'this ngo do not exists!!'})
+        if (!ngo) {
+            return res.status(404).json({ message: 'NGO not found!' });
         }
 
         const newUserInfo = {
             name: req.body.name,
-            address: req.body.address,
+            Useraddress: req.body.Useraddress,  // Ensure this matches your schema field Useraddress
             email: req.body.email,
             phone: req.body.phone,
             foodType: req.body.foodType,
-            noofPeople: req.body.noofPeople,
-        }
+            noOfPeople: req.body.noofPeople,
+        };
         
-        console.log("came response in the connect/ngoid roiute is :",newUserInfo)
-        ngo.usersInfo.push(newUserInfo)
+        console.log("New user info for connection:", newUserInfo);
+        ngo.usersInfo.push(newUserInfo);
         await ngo.save();
 
-        res.status(201).json({message:'user connected to ngo successFully', ngo})
-    }
-    catch(err){
-        console.log('error connecting to ngo !!');
-        res.status(500).json({message:'server error is there !'})
+        res.status(201).json({ message: 'User connected to NGO successfully', ngo });
+    } catch (err) {
+        console.error('Error connecting to NGO:', err);
+        res.status(500).json({ message: 'Server error!' });
     }
 });
 

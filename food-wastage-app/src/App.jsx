@@ -42,7 +42,7 @@ function App() {
             <Route path="/ngologin" element={<NgoLogin />} /> {/* NGO Login */}
             <Route path="/donate" element={<Donate />} />
             <Route path="/connect/:ngoId" element={<Connect />} />
-            <Route path="/userconnect" element={<UserConnect />} />
+            <Route path="/userconnect/:ngoId" element={<UserConnect />} />
           </Routes>
         </div>
 

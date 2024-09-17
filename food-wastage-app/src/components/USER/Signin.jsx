@@ -71,7 +71,7 @@ function Signin() {
                         setShowLogout(true)
                         
                         localStorage.setItem('userToken',response.data.token)
-                        alert(response.data.message)
+                        alert("logged successfully")
                     }).then(handlesignin);
                 }}
                 >Log in</Button>

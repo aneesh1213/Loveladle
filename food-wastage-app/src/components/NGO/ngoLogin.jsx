@@ -67,8 +67,9 @@ function NgoLogin() {
 
                             // Successful login
                             localStorage.setItem('userToken', response.data.token);
+                            const ngoId = response.data.ngoId
                             alert(response.data.message);
-                            navigate('/userconnect');  // Redirect after successful login
+                            navigate(`/userconnect/${ngoId}`);  // Redirect after successful login
 
                         } catch (error) {
                             // Error handling

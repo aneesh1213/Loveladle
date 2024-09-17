@@ -30,7 +30,7 @@ router.post('/login', async (req, res) => {
     if (ngo) {
         if (ngo.password === password) {
             const token = jwt.sign({ "email": email, "password": password }, SECRET);
-            return res.status(200).json({ message: 'NGO Logged in Successfully', token: token });
+            return res.status(200).json({ message: 'NGO Logged in Successfully', token: token, ngoId:ngo._id });
         } else {
             return res.status(401).json({ message: "Wrong password entered!" });
         }
@@ -41,14 +41,25 @@ router.post('/login', async (req, res) => {
 
 // getting the users from the backend to conncect with them 
 
-router.get('/userconnect', async(req, res)=>{
-    try{    
-        const users = await User.find({});
-        res.json(users)
-    }catch(err){
-        console.error('Error fetching Users :', err);
+router.get('/userconnect/:ngoId', userAuth,async (req, res) => {
+    try {
+        const { ngoId } = req.params;
+
+        // Find the NGO by its ID and populate the usersInfo array
+        const ngo = await Ngo.findById(ngoId).populate('usersInfo');  // Assuming usersInfo is a populated field
+
+        if (!ngo) {
+            return res.status(404).json({ message: 'NGO not found' });
+        }
+
+        // Respond with the list of users (usersInfo) associated with the NGO
+        res.json(ngo.usersInfo);
+        console.log(ngo.usersInfo)
+    } catch (err) {
+        console.error('Error fetching users for NGO:', err);
         res.status(500).json({ message: 'Internal Server Error' });
     }
 });
+
 
 export default router;

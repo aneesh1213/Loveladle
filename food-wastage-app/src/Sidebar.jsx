@@ -6,10 +6,12 @@ import ListItemText from '@mui/material/ListItemText';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link as RouterLink } from 'react-router-dom';
-
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { role } from './atoms';
 const drawerWidth = 250;
 
 const Sidebar = ({ open, onClose }) => {
+  const userRoleState = useRecoilValue(role);
   return (
     <Drawer
       variant="persistent"
@@ -28,6 +30,7 @@ const Sidebar = ({ open, onClose }) => {
       }}
     >
       {/* Sidebar content */}
+
       <div style={{ padding: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <ListItemText primary="Menu" />
         <IconButton onClick={onClose} color="inherit">
@@ -36,26 +39,22 @@ const Sidebar = ({ open, onClose }) => {
       </div>
       <List>
         {/* Sidebar navigation links */}
-        <ListItem button component={RouterLink} to="/landing">
-          <ListItemText primary="Home" />
-        </ListItem>
-        {/* <ListItem button component={RouterLink} to="/register">
-          <ListItemText primary="Register NGO" />
-        </ListItem> */}
-        <ListItem button component={RouterLink} to="/donate">
-          <ListItemText primary="Donate" />
-        </ListItem>
-        {/* <ListItem button component={RouterLink} to="/ngologin">
-          <ListItemText primary="Ngo Login" />
-        </ListItem> */}
-        {/* <ListItem button component={RouterLink} to="/about">
-          <ListItemText primary="About" />
-        </ListItem>
-        <ListItem button component={RouterLink} to="/contact">
-          <ListItemText primary="Contact" />
-        </ListItem> */}
+        {userRoleState.userRole && (
+          <>
+            <ListItem button component={RouterLink} to="/landing">
+              <ListItemText primary="Home" />
+            </ListItem>
+
+            <ListItem button component={RouterLink} to="/donate">
+              <ListItemText primary="Donate" />
+            </ListItem>
+          </>
+
+        )}
       </List>
+
     </Drawer>
+
   );
 };
 
