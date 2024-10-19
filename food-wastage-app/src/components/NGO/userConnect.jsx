@@ -11,7 +11,7 @@ export default function UserConnect() {
     useEffect(() => {
         const token = localStorage.getItem('userToken');
         
-        axios.get(`http://localhost:3000/ngo/userconnect/${ngoId}`, {
+        axios.get(`http://localhost:3000/ngo/userconnect/${ngoId}/`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -22,16 +22,41 @@ export default function UserConnect() {
         });
     }, [ngoId]);
 
+
     const handleConnect = (userId) => {
-        navigate(`/userconnect/${ngoId}/${userId}`);
+        const token = localStorage.getItem('userToken');
+
+        if(!ngoId || !userId){
+            console.error('NGO ID or User ID is missing');
+            alert('NGO ID or User ID is missing');
+            return;
+        }
+
+        console.log("ngoId is :", ngoId);
+        console.log("user id is : ", userId);
+
+        axios.post(`http://localhost:3000/ngo/connect/${ngoId}/${userId}`,{},{
+            headers:{
+                'Authorization':`Bearer ${token}`
+            }
+        }
+        ).then((res)=>{
+            console.log("the res we got is : ",res.data);
+            alert( `email sent to ${userId}`)
+        }).catch((err)=>{
+            console.log("error from userconnect component and handleconnect function is:".replace, err);
+            console.error(`there was an error sending email `, err);    
+            alert('failed to send email !');
+        })
     };
+    
 
     return (
         <Grid container spacing={3} style={{ marginTop: 50 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             {users.map(user => (
                 <Grid item xs={12} lg={8} sm={6} md={3} key={user._id}>
                     <User user={user} onConnect={() => handleConnect(user._id)} />
-                </Grid>
+                </Grid>  
             ))}
         </Grid>
     );
